@@ -1,0 +1,10 @@
+{
+    "bot": {
+        "settings": {
+            "keepalive": true
+        }
+    },
+    "api": {
+        "version": "v1"
+    }
+}

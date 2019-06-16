@@ -1,0 +1,17 @@
+{
+  "name": "bgworker",
+  "version": "1.0.0",
+  "description": "Feeds the DB with data of the TeamSpeak Server, Checks the Status of the other Services, and some other stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benedikt Bertsch",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "requestretry": "^4.0.0",
+    "ts3-nodejs-library": "^1.15.0"
+  }
+}
