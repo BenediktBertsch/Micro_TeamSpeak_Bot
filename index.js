@@ -39,26 +39,26 @@ ts3.on("clientconnect", async ev => {
             if (err) { console.log(err.message) }
         })
         request.post({
-            url: 'http://' + hostadress + '/userlog?uid=' + client._static.uid,
+            url: 'http://' + hostadress + '/userlog?uid=' + client._propcache.client_unique_identifier,
             maxAttempts: 5,
             retryDelay: 5000,
             retrySrategy: request.RetryStrategies.HTTPOrNetworkError
         }, function (err, httpResponse, body) {
             if (err) { console.log(err.message) } else {
                 if ('{"message":"User added."}' == body) {
-                    client.message('Hallo ' + client.getCache().client_nickname + ', du kannst dich ab sofort mit "!register deinbenutzername deinpasswort" dich registrieren und dadurch deine auf dem Server verbrachte Zeit protokollieren lassen. Dazu musst du in diesem Chat das genannte Command ausführen. Anschließend kannst du auf https://xaviius.de dich mit diesen Daten einloggen.')
+                    client.message('Hallo ' + client.client_nickname + ', du kannst dich ab sofort mit "!register deinbenutzername deinpasswort" dich registrieren und dadurch deine auf dem Server verbrachte Zeit protokollieren lassen. Dazu musst du in diesem Chat das genannte Command ausführen. Anschließend kannst du auf https://xaviius.de dich mit diesen Daten einloggen.')
                 }
             }
         })
         request.post({
-            url: 'http://' + hostadress + '/logadd?uid=' + client._static.uid + '&type=c',
+            url: 'http://' + hostadress + '/logadd?uid=' + client._propcache.client_unique_identifier + '&type=c',
             maxAttempts: 5,
             retryDelay: 5000,
             retrySrategy: request.RetryStrategies.HTTPOrNetworkError
         }, function (err, httpResponse, body) {
             if (err) { console.log(err.message) }
         })
-        logadd(`Client ${client.getCache().client_nickname} connected`)
+        logadd(`Client ${client.client_nickname} connected`)
     } catch (error) {
         console.log(error)
     }
@@ -108,7 +108,7 @@ ts3.on("textmessage", async ({ msg, invoker }) => {
             client_type: 0
         })
         clients.forEach(client => {
-            if (client.getCache().client_nickname == invoker._propcache.client_nickname) {
+            if (client.client_nickname == invoker._propcache.client_nickname) {
                 var group;
                 switch (invoker._propcache.client_servergroups[0]) {
                     case 6: group = 'Administrator'

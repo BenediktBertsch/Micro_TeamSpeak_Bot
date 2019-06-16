@@ -1,4 +1,4 @@
-FROM node:10-slim
+FROM node:12-slim
 
 ENV APIport=
 ENV APIhost=""
@@ -15,6 +15,6 @@ COPY package.json /nodeapp
 COPY package-lock.json /nodeapp
 COPY config.json /nodeapp
 COPY index.js /nodeapp
-RUN npm install
+RUN npm install --prod
 CMD ["node", "index.js"]
 EXPOSE 3000
