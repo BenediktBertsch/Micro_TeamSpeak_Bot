@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BenediktBertsch/Micro_TeamSpeak_Bot/master/logo.png" width="150">
+</p>
+
 # TeamSpeak Bot
 
 TeamSpeak 3 Serverquery Bot to create statistics of registered Users
