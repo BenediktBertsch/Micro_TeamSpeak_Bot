@@ -46,10 +46,11 @@ ts3.on("clientconnect", async ev => {
         }, function (err, httpResponse, body) {
             if (err) { console.log(err.message) } else {
                 if ('{"message":"User added."}' == body) {
-                    client.message('Hallo ' + client.client_nickname + ', du kannst dich ab sofort mit "!register deinbenutzername deinpasswort" dich registrieren und dadurch deine auf dem Server verbrachte Zeit protokollieren lassen. Dazu musst du in diesem Chat das genannte Command ausführen. Anschließend kannst du auf https://xaviius.de dich mit diesen Daten einloggen.')
+                    client.message('Hallo ' + client._propcache.client_nickname + ', du kannst dich ab sofort mit "!register deinbenutzername deinpasswort" dich registrieren und dadurch deine auf dem Server verbrachte Zeit protokollieren lassen. Dazu musst du in diesem Chat das genannte Command ausführen. Anschließend kannst du auf https://xaviius.de dich mit diesen Daten einloggen.')
                 }
             }
         })
+        
         request.post({
             url: 'http://' + hostadress + '/logadd?uid=' + client._propcache.client_unique_identifier + '&type=c',
             maxAttempts: 5,
@@ -103,12 +104,11 @@ ts3.on("ready", async () => {
 ts3.on("textmessage", async ({ msg, invoker }) => {
     try {
         logadd(invoker._propcache.client_nickname + " " + msg)
-        logadd(invoker._propcache.client_nickname + " " + msg)
         const clients = await ts3.clientList({
             client_type: 0
         })
         clients.forEach(client => {
-            if (client.client_nickname == invoker._propcache.client_nickname) {
+            if (client._propcache.client_nickname == invoker._propcache.client_nickname) {
                 var group;
                 switch (invoker._propcache.client_servergroups[0]) {
                     case 6: group = 'Administrator'
